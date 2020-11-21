@@ -1,0 +1,36 @@
+/* 此文件中包含所有项目都共用的全局CSS */
+*{  	/*选择所有的元素*/
+	/* box-sizing:content-box 	内容盒子()*/
+	box-sizing: border-box;/* 边框盒子，简化盒子尺寸计算*/
+	
+}
+body{
+	margin: 0;
+	color: #999;
+	background: #fff;
+	font-size: 12px;                                     /* 字体大小 */
+	line-height: 1.667;                                 /* 行高 */
+	font-style: "arial,helvetica,sana-serif";          /*  行高1.667em */
+	}
+a{
+	color: #fff;
+	text-decoration: none;
+}
+a:hover{	/* 伪类选择器，选中鼠标 */
+	color: #e8b916;
+}
+ol,
+ul{
+	margin: 0;
+	padding: 0;
+}
+li{
+	/* 修改列表项前面的提示符号 */
+	/* list-style:diss;圆饼 */
+	/* list-style:diss;数字/
+	/* list-style:diss;圆圈 */
+	/* list-style:lower-alpha;大写字母 */
+	/* list-style:upper-alpha;小写字母 */
+	/* list-style:upper-roman;大写罗马字母 */
+	list-style: none;
+}
