@@ -5,218 +5,189 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link rel="icon" type="text/css" href="img/favicon.ico"/>
-	<title>iWeb在线课堂</title>
-	<link rel="stylesheet" href="css/base.css"/>
+	<title>隐食餐厅</title>
+	<link rel="stylesheet" href="css/base.css"/>	<!-- 链接一个外部资源到当前网页：<link rel="icon" href="url"> -->
 	<link rel="stylesheet" href="css/font-awesome.css">
 	<style>
 		.topbar{
 			width: 100%;
-			height: 29px;
-			line-height: 29px;
-			background: #f9f9f9;
-			border-bottom: 1px solid #eee;	
+			height: 60px;
+			line-height: 40px;
+			background:rgba(0,0,0,0.4);
+			border-bottom: none;	
 			text-align: center;
+			padding: 20px;
+			font-size: 1.1em;
 		}
-		.container{
-			width: 1000px;
+		/* 此处放置所有组件的公共样式 */
+		.container{		/*公共样式*/
+			width: 1200px;
 			margin-left: auto;
 			margin-right: auto;
-			border: 1px solid #aaa; /* 测试用 */
+			border: none; /* 测试用 */
+		}
+		.theme{	/* 主题色 (公共样式)*/
+		}
+		.theme-reverse{	/* 主题色的反色  (公共样式) */
+			color: #e8b916;
+			
 		}
 		.topbar>.container>a,
 		.topbar>.container>span{	/* 复杂选择器:>选择孩子,逗号选取多个*/
-			padding-left: 1em;	
+			padding-left: 2em;
 		}		
-		.theme{	/* 主题色 */
+		.topbar  .login-register-box {
+			float: right;
+			background: #db1900;
+			padding: 0  1em;
+			width: 120px;
 		}
-		.theme-reverse{	/* 主题色的反色 */
-			color: #f60;
+		.topbar  .login-register-box  a {
+			color: #fff;
 		}
-		.searchbar{
-			width: 100%;
-			background: #fff;			
+		.topbar  .login-register-box  a:hover {
+			color: #e8b916;
 		}
-		.searchbar>.container{
-			padding-top:2em;
-			padding-bottom: 2em;
+		.topbar  .login-register-box  span {
+			margin: 0  0.5em;
+		}
+		.bottombar{
+			background: #272831;
+			border-top: none;
+		}
+		.servicelist{		/*弹性父容器*/
+			display: flex;
+		}
+		.servicelist  .services{	/*弹性子元素，同时也是一个弹性父容器*/
+			flex:615;
+			display: flex;
+		}
+		.servicelist  .services  .service{
+			flex:1;
 			
 		}
-		.search{
-			float:right;  /*搜索条右浮动*/
-			margin-top:6px;
+		.bottombar.services  .service h3{
+			 color: #fff;
 		}
-		.search>input{
-			width: 430px;
-			height: 32px;
-			border:1px solid #ccc;
-			/* 输入框获得焦点时的外围轮廓线 */
-			outline: none;
-			padding-left: .6em;/* CSS中约定:0.8可简写为.8 */
-			padding-right:.6em;
-			vertical-align: middle;	/* 行内框元素与同一行中的内容数值对齐 */
+		.services  .service ul li a{
+			 color: #999;
 		}
-		.search>.fa-search{
-			background: #57bc4c;
-			color: #fff;
-			font-size: 2.2em;
-			width: 50px;
-			height: 32px;
-			line-height:32px;	/*文字数值方向上居中*/
-			text-align: center; /*文字水平方向上居中*/
-			vertical-align: middle;	/* 行内框元素与同一行中的内容数值对齐 */
+		.servicelist  .hotline{		/*弹性子元素，同时也是一个弹性父容器*/
+			flex:385;
+			display: flex;
 		}
-		.cart-container{
-			/* 修改购物车的定位方式，为下拉菜单提供参照物，但不脱离文档流 */
-			position: relative;
-			float:right;
-			margin-top: 6px;
-			margin-left: 20px;
+		.servicelist  .hotline  .left{
+			flex:100;
+			padding: 40px  0  0  50px;	/*上右下左*/
 		}
-		.cart{
-			background: #f9f9f9;
-			border: 1px solid #ddd;
-			line-height: 31px;
-			/* 修改光标样式 */
-			cursor:pointer;
-			position: relative;/*只有定位了的元素才能使用z-index*/
-			z-index: 1;
+		.servicelist  .hotline  .left  .phone{
+			display: inline-block;
+			width: 40px;
+			height: 40px;
+			background-image: url(../assets/img/iconlist.png);
+			background-position: 0 -410px;
 		}
-		.cart.open{
-			line-height: 31px;
-			background: #fff;
-			/* border-bottom-color:#fff; 下边框颜色 */
-			border-bottom: none;
+		.servicelist  .hotline  .right{
+			flex:285;
+			padding: 40px  0  0  0;
+			font-size: 1.3em;
 		}
-		.cart>.fa{
-			padding-left: 0.6em;
-			padding-right: 0.6em;
-			color:#57bc4c;
+		.container  .copyright{
+			text-align: center;
+			color: #999;
+			padding: 8px 0;
+			border-top: 1px solid #ddd;
+			line-height: 20px;
 		}
-		.cart>.caret{	/* 小三角的动画基础类 */
-			transform: rotate(0);	/*旋转*/
-			transition: all .3s;	/*渐变动画*/
-		}
-		.cart>.caret-rotate{	/* 小三角的动画目标类 */
-			transform: rotate(180deg);
-		}
-		.cart-container>.dropdown{
-			position: absolute;	/* 绝对定位的元秦可以处于其他元素上方 */
-			top: 31px;
-			right: 0;
-			border: 1px solid #ddd;
-			/* padding: 2em 3em 2em 3em;	上右下左 */
-			/* padding: 2em 3em 2em ; 上右下，左和右值相同*/
-			padding: 2em 3em;	/* 上右，上和下相同，左和右相同 */
-			width: 262px;
-			background: #fff;	/* DIV元素默认背景为透明 */
-			display: none;
-		}
-		.cart-container>.dropdown.open{
-			display: block;
-		}
-		.navbar{
-			background: #57ba4c;
-			width: 100%;
-			height: 42px;
-			border-bottom: 2px solid #ceebd;
-			line-height: 40px;
-			color: #fff;
-			font-size: 1.2em
-		}
-		.navbar .menu{
-			margin: 0;		/*清楚浏览器为UL自动添加的样式*/
-			padding: 0;
-		}
-		 .navbar .menu li{
-			 float:left;  /*让原本的块级元素li全部浮动起来*/
-			 padding: 0 1.5em;
-		 }
-		 .navbar .menu li:hover{
-			 background: #4aaf3f;
-		 }
-		 .navbar .menu li a{
-		 	 color: #fff;
-		 }
 	</style>
 </head>
 <body>
+	
 	<!-- 1楼：顶部条 -->
 	<div class="topbar">
 		<div class="container">
 			<a href="#">
-				<span class="fa fa-star"></span>
-				收藏i前段
-			</a>
-			<a href="#">
 				<span class="fa fa-mobile-phone fa-lg"></span>
-				<span class="theme-reverse">下载手机客户端</span>
+				下载手机客户端
 			</a>
-			<span>
+			<span>|</span>
+			<a href="#">
 				<span class="fa fa-envelope"></span>
-				反馈邮箱：iWeb@tedu.cn
-			</span>
+				反馈意见
+			</a>
+			<span>|</span>
 			<span>
-				<span class="fa fa-mobile-phone"></span>
-				客服热线；4008-200-200
+				<span class="fa fa-phone"></span>
+				客服热线：4008-200-200
 			</span>
-		</div>
-	</div>
-	
-	<!-- 2楼：搜索条 -->
-	<div class="searchbar">
-		<div class="container">
-			<!-- 1.LOGO -->
-			<img src="img/logo.png" alt="iWeb LOGO">
-			<!-- 3.我的购物车 -->
-			<div class="cart-container" id="myCart">
-				<!-- 购物车：z-index要高于“下拉菜单” -->
-				<div class="cart " id="cart">
-					<span class="fa fa-shopping-cart"></span>
-					<span>我的购物车(<b>0</b>)</span>
-					<span class="fa fa-caret-down caret" id="caret"></span>
-				</div>
-				<!-- 下拉菜单 -->
-				<div class="dropdown" id="dropdown">
-					请登录后查看您的购物车
-				</div>
-			</div>
-			<!-- 2.输入框  placeholder:占位符-->
-			<div class="search">
-				<input type="text" placeholder="课程搜索"><span class="fa fa-search fa-lg"></span>
+			
+			<!-- 右侧的登录/注册菜单 -->
+			<div class="login-register-box">
+				<a href="#">登录</a>
+				<span>|</span>
+				<a href="#">注册</a>
 			</div>
 		</div>
 	</div>
 	
-	<!-- 3楼：导航条 -->
-	<div class="navbar">
+	<!-- 底部条 -->
+	<div class="bottombar">
 		<div class="container">
-			<!-- 左侧的功能列表 -->
-			<ul class="menu">
-				<li><a href="index.html">首页</a></li>
-				<li><a href="course.html">全部课程</a></li>
-				<li><a href="course.html?tid=1">基础课程</a></li>
-				<li><a href="course.html?tid=2">核心课程</a></li>
-				<li><a href="course.html?tid=3">进阶课程</a></li>
-				<li><a href="teacher.html">名师堂</a></li>
-				<li><a href="school.html">校区</a></li>
-			</ul>
-			<!-- 右侧登录/注册菜单 -->
+			<!-- 服务列表 -->
+			<div class="servicelist">
+				<div class="services">
+					<div class="service">
+						<h3>关于i前端</h3>
+						<ul>
+							<li><a href="#">发展历程</a></li>
+							<li><a href="#">管理团队</a></li>
+							<li><a href="#">企业文化</a></li>
+							<li><a href="#">加入我们</a></li>
+						</ul>
+					</div>
+					<div class="service">
+						<h3>新手帮助</h3>
+						<ul>
+							<li><a href="#">学员账号</a></li>
+							<li><a href="#">选课流程</a></li>
+							<li><a href="#">网报流程</a></li>
+							<li><a href="#">上课地点</a></li>
+						</ul>
+					</div>
+					<div class="service">
+						<h3>常见问题</h3>
+						<ul>
+							<li><a href="#">如何注册</a></li>
+							<li><a href="#">如何搜课</a></li>
+							<li><a href="#">如何报名</a></li>
+							<li><a href="#">如何缴费</a></li>
+						</ul>
+					</div>
+					<div class="service">
+						<h3>联系我们</h3>
+						<ul>
+							<li><a href="#">校区电话</a></li>
+							<li><a href="#">意见建议</a></li>
+							<li><a href="#">联系邮箱</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="hotline">
+					<div class="left">	<!-- left宽高为100，而电话图标只有40px -->
+						<span class="phone"></span>		<!-- 使用span显示图片，而不是left -->
+					</div>
+					<div class="right">
+						<div>客服热线</div>
+						<div>4008-220-220（9:00-24:00）</div>
+					</div>
+				</div>
+			</div>
+			<!-- 版权声明 -->
+			<div class="copyright">
+				<div>Copyright © 2016 iqianduan.com, All Rights Reserved 版权所有</div>
+				<div>北京前端教育科技有限公司　京ICP备123456号-1 京公网安备110180201608号</div>
+			</div>
 		</div>
 	</div>
-	
-	<script>
-		//鼠标进入“我的购物车”则后面的小三角开始选择，离开则转回来
-		myCart.onmouseenter =()=>{
-			caret.classList.add('caret-rotate')
-			cart.classList.add('open')
-			dropdown.classList.add('open')
-		}
-		myCart.onmouseleave =()=>{
-			caret.classList.remove('caret-rotate')	
-			cart.classList.remove('open')
-			dropdown.classList.remove('open')
-		}
-	</script>
-	
 </body>
 </html>
